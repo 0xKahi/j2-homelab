@@ -1,13 +1,13 @@
 let mapleader = ' '
 let maplocalleader = ' '
 
+" Disable compatibility with vi which can cause unexpected issues.
+set nocompatible
+
 filetype on
 filetype plugin on
 filetype indent on
 syntax on
-
-" Disable compatibility with vi which can cause unexpected issues.
-set nocompatible
 
 set number
 set relativenumber
@@ -46,9 +46,9 @@ set splitbelow
 set splitright
 
 " Cursor shapes per mode (Linux console)
-let &t_SI = "\e[?4"   " insert mode  — blinking underline
-let &t_SR = "\e[?2"   " replace mode — blinking underline
-let &t_EI = "\e[?6"   " normal mode  — blinking block
+" let &t_SI = "\e[?4"   " insert mode  — blinking underline
+" let &t_SR = "\e[?2"   " replace mode — blinking underline
+" let &t_EI = "\e[?6"   " normal mode  — blinking block
 
 inoremap kj <ESC>
 

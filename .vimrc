@@ -45,6 +45,11 @@ set scrolloff=8
 set splitbelow
 set splitright
 
+" Cursor shapes per mode (Linux console)
+let &t_SI = "\e[?4c"   " insert mode  — blinking underline
+let &t_SR = "\e[?2c"   " replace mode — blinking underline
+let &t_EI = "\e[?6c"   " normal mode  — blinking block
+
 inoremap kj <ESC>
 
 nnoremap U <C-r>

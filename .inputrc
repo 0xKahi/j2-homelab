@@ -5,7 +5,7 @@ set editing-mode vi
 set keyseq-timeout 100
 
 # SHOW THE VIM MODE IN THE PROMPT (COMMAND OR INSERT)
-set show-mode-in-prompt on
+# set show-mode-in-prompt on
 
 # SET THE MODE STRING AND CURSOR TO INDICATE THE VIM MODE
 #   FOR THE NUMBER AFTER `\e[`:

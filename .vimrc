@@ -46,9 +46,9 @@ set splitbelow
 set splitright
 
 " Cursor shapes per mode (Linux console)
-let &t_SI = "\e[?4c"   " insert mode  — blinking underline
-let &t_SR = "\e[?2c"   " replace mode — blinking underline
-let &t_EI = "\e[?6c"   " normal mode  — blinking block
+let &t_EI = "\033[6 q" " Normal mode: steady block cursor (2)
+let &t_SI = "\033[4 q" " Insert mode: steady bar cursor (6)
+let &t_SR = "\033[2 q" " Replace mode: steady underline cursor (4)
 
 inoremap kj <ESC>
 

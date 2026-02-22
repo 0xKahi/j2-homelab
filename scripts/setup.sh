@@ -28,7 +28,7 @@ run_apt() {
     if $IS_TEST; then
        echo "sudo apt install "${packages[@]}" -y"
     else
-       sudo apt install "${packages[@]}" -y
+       apt install "${packages[@]}" -y
     fi
 }
 
@@ -46,7 +46,7 @@ setup_colors() {
     if $IS_TEST; then
        echo "sudo tty-color-tool set "${config}""
     else
-       sudo tty-color-tool set "${config}" 
+       tty-color-tool set "${config}" 
     fi
 
     logblock "success" "Colors set up."

@@ -28,8 +28,8 @@ set vi-cmd-mode-string \1\e[1 q\2
 # \e[?2;0;32c = blinking underline, green (insert mode)
 # \e[?6;0;32c = blinking block, green (command mode)
 $if term=linux
-  set vi-ins-mode-string \1\e[?2;0;32c\2
-  set vi-cmd-mode-string \1\e[?6;0;32c\2
+  set vi-ins-mode-string \1\e[?2;0;2c\2
+  set vi-cmd-mode-string \1\e[?6;0;2c\2
 $endif
 
 set blink-matching-paren on

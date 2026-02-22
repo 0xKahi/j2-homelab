@@ -31,11 +31,14 @@ source ~/.bashrc
 
 
 ### 2. Setup TTY Colors 
+```bash
+chmod +x ./bin/tty-color-tool
+```
 
 in root do 
 
 ```bash
-tty-color-tool set ~/j2-homelab/tty-colors.txt
+tty-color-tool set-soft ~/j2-homelab/tty-colors.txt
 ```
 
 ### 3. Setup Home Lab

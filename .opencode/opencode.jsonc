@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "cyberpunk-theme",
+  "small_model": "opencode/gpt-5-nano",
+  "permission": {
+    "external_directory": {
+      "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/jojo-vault/journal/homelab/**": "allow"
+    }
+  }
+}

@@ -1,0 +1,147 @@
+# https://deut-erium.github.io/2024/01/28/inputrc.html
+# TURN ON VIM (E.G. FOR READLINE)
+set editing-mode vi
+
+set keyseq-timeout 100
+
+# SHOW THE VIM MODE IN THE PROMPT (COMMAND OR INSERT)
+set show-mode-in-prompt on
+
+# SET THE MODE STRING AND CURSOR TO INDICATE THE VIM MODE
+#   FOR THE NUMBER AFTER `\e[`:
+#     0: blinking block
+#     1: blinking block (default)
+#     2: steady block
+#     3: blinking underline
+#     4: steady underline
+#     5: blinking bar (xterm)
+#     6: steady bar (xterm)
+
+# distinguish between command and insert mode
+# Prepend I to indicate insert mode and have blinking bar
+set vi-ins-mode-string I\1\e[5 q\2
+# prepend C to indicate command mode and have a blinking block
+set vi-cmd-mode-string C\1\e[1 q\2
+
+# TTY (linux console) - use Linux-specific cursor escapes with green color
+# \e[?6;0;32c = blinking block, green (insert mode)
+# \e[?2;0;32c = steady block, green (command mode)
+$if term=linux
+  set vi-ins-mode-string I\1\e[?6;0;32c\2
+  set vi-cmd-mode-string C\1\e[?2;0;32c\2
+$endif
+
+set blink-matching-paren on
+
+# sets the readline to display possible completions using different colors
+# to indicate filetypes determined from env variable LC_COLORS
+set colored-stats on
+
+
+# Completions listed immediately instead of bell when completing word has more than one possible completion
+set show-all-if-ambiguous on
+
+set completion-ignore-case on
+set menu-complete-display-prefix on
+
+# Enables the display of only the first 5 unique characters from a group of file or directory name suggestions when you utilize tab-completion.
+# If multiple entries share a long prefix, they will be condensed using ellipses, making it easier to locate and choose the desired item.
+# Useful in directories containing many similarly named images or documents.
+set completion-prefix-display-length 5
+
+# # Set the bell-style to be visible only i.e no audio played on command completion
+# # can also be set to none
+# set bell-style visible
+
+
+$if mode=vi
+#vi mode settings
+    set keymap vi-command
+
+    "dd": kill-whole-line
+    "diw": "lbdw"
+    # change inner word
+    "ciw": "lbcw"
+
+    # delete around double quoted string -> delete the text in double quoted strings and the quotes themselves
+    # F search backward for a double quote, then delete till first forward search of double quotes
+    "da\"": "lF\"df\""
+    # delete inside double quoted string -> delete the text inside the double quoted strings but not the quotes
+    "di\"": "lF\"lmtf\"d`t"
+    # change inside double quoted string basically delete inside double quoted string and go in insert mode
+    "ci\"": "di\"i"
+    # change around double quoted string
+    "ca\"": "da\"i"
+
+    # delete around single quoted string
+    "da'": "lF'df'"
+    "di'": "lF'lmtf'd`t"
+    "ci'": "di'i"
+    "ca'": "da'i"
+
+    # delete around tilde
+    "da`": "lF\`df\`"
+    "di`": "lF\`lmtf\`d`t"
+    "ci`": "di`i"
+    "ca`": "da`i"
+
+    # delete around parenthesis
+    "da(": "lF(df)"
+    "di(": "lF(lmtf)d`t"
+    "ci(": "di(i"
+    "ca(": "da(i"
+    "da)": "lF(df)"
+    "di)": "lF(lmtf)d`t"
+    "ci)": "di(i"
+    "ca)": "da(i"
+
+    # delete around curly
+    "da{": "lF{df}"
+    "di{": "lF{lmtf}d`t"
+    "ci{": "di{i"
+    "ca{": "da{i"
+    "da}": "lF{df}"
+    "di}": "lF{lmtf}d`t"
+    "ci}": "di}i"
+    "ca}": "da}i"
+
+    # delete around square brackets
+    "da[": "lF[df]"
+    "di[": "lF[lmtf]d`t"
+    "ci[": "di[i"
+    "ca[": "da[i"
+    "da]": "lF[df]"
+    "di]": "lF[lmtf]d`t"
+    "ci]": "di]i"
+    "ca]": "da]i"
+
+    # delete around angled brackets
+    "da<": "lF<df>"
+    "di<": "lF<lmtf>d`t"
+    "ci<": "di<i"
+    "ca<": "da<i"
+    "da>": "lF<df>"
+    "di>": "lF<lmtf>d`t"
+    "ci>": "di>i"
+    "ca>": "da>i"
+
+    # delete around forward slash
+    "da/": "lF/df/"
+    "di/": "lF/lmtf/d`t"
+    "ci/": "di/i"
+    "ca/": "da/i"
+
+    # delete around colon
+    "da:": "lF:df:"
+    "di:": "lF:lmtf:d`t"
+    "ci:": "di:i"
+    "ca:": "da:i"
+
+    "gg": beginning-of-history
+    "G" : end-of-history
+
+    # settings to be changed in insert mode
+    set keymap vi-insert
+    "kj": vi-movement-mode
+# end vi mode settingss
+$endif

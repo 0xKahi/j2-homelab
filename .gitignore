@@ -1,0 +1,23 @@
+node_modules
+.docker-volumes
+.build
+.env
+.DS_Store
+dist
+database-client-config.json
+
+# next.js
+.next/
+out/
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+.env
+*.ignore.cfg
+
+.opencode/plans
+.opencode/prompts

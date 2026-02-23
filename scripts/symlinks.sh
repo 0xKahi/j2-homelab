@@ -3,7 +3,7 @@
 # Get the absolute path of the directory where the script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-CONFIG_FILE="$SCRIPT_DIR/../cfgs/symlinks_config.conf"
+CONFIG_FILE="$SCRIPT_DIR/../symlinks_config.conf"
 
 . $SCRIPT_DIR/utils.sh
 

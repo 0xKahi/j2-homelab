@@ -1,11 +1,5 @@
 #!/bin/bash
 
-default_color=$(tput sgr 0)
-red="$(tput setaf 1)"
-yellow="$(tput setaf 3)"
-green="$(tput setaf 2)"
-blue="$(tput setaf 4)"
-
 info() {
     # printf "%s==> %s%s\n" "$blue" "$1" "$default_color"
     printf "\e[44;30mINFO\e[0m \e[94m%s\e[0m\n" "$1"
@@ -28,6 +22,10 @@ warning() {
 
 debug() {
     printf "\e[45;30mDEBUG\e[0m \e[95m%s\e[0m\n" "$1"
+}
+
+green() {
+    printf "\e[32m%s\e[0m" "$1"
 }
 
 log(){

@@ -18,7 +18,6 @@ any time you need to check, update or add to the plans, navigate to the above di
 
 ## Project Structure
 - `scripts/`: Contains setup scripts for setting up and configuring various components of the home lab.
-- `bin/`: Contains bash utility scripts for automating tasks and managing the home lab environment.
-- `bash/`: contains custom bash configurations and scripts for enhancing the command-line experience in the home lab environment.
-- `cfgs/symlinks_config.conf`: Configuration file for managing symbolic links in the home lab environment.
-- `cfgs/packages.conf`: Configuration file for base tools to install.
+- `.homelab/` Contains base configurations that will be symlinked to the enviroment 
+- `.homelab/bin/`: Contains bash utility scripts for automating tasks and managing the home lab environment.
+- `symlinks_config.conf`: Configuration file for managing symbolic links in the home lab environment.

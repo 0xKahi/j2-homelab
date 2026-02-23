@@ -32,35 +32,59 @@ run_apt() {
     fi
 }
 
-install_packages() {
-    logblock "info" "Installing Base Packages..."
-    run_apt "$SCRIPT_DIR/../cfgs/packages.conf"
-    logblock "success" "Base Packages installed."
+setup_bash() {
+    logblock "info" "setting up bash"
+
+    local bashrc="$HOME/.bashrc.pbk"
+    local source_line='[ -f "$HOME/.homelab/bash/custom.bash" ] && source "$HOME/.homelab/bash/custom.bash"'
+    file_check "$bashrc" || return 1
+
+    if grep -qF "$source_line" "$bashrc"; then
+        warning "Source line already exists in $source_line — skipping."
+    else
+        echo "$source_line" >> "$bashrc"
+        success "Appended source line to $bashrc."
+    fi
 }
 
-setup_colors() {
-    local config="~/j2-homelab/tty-colors.txt"
-    file_check "$config" || return 1
-    logblock "info" "Setting up colors..."
+install_docker() {
+    logblock "info" "Installing Docker..."
 
     if $IS_TEST; then
-       echo "sudo tty-color-tool set "${config}""
+        echo "apt install -y ca-certificates curl gnupg"
+        echo "install -m 0755 -d /etc/apt/keyrings"
+        echo "curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
+        echo "chmod a+r /etc/apt/keyrings/docker.gpg"
+        echo "echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable' > /etc/apt/sources.list.d/docker.list"
+        echo "apt update && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin"
     else
-       tty-color-tool set "${config}" 
+        apt install -y ca-certificates curl gnupg
+
+        install -m 0755 -d /etc/apt/keyrings
+        curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+        chmod a+r /etc/apt/keyrings/docker.gpg
+
+        echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] \
+            https://download.docker.com/linux/debian bookworm stable" \
+            > /etc/apt/sources.list.d/docker.list
+
+        apt update && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
     fi
 
-    logblock "success" "Colors set up."
+    logblock "success" "Docker installed."
+    debug "enable by running: $(green "systemctl enable --now docker")"
 }
 
-options=("Install Packages" "Quit")
+options=("setup bash" "install docker" "quit")
 
 logblock "debug" "HomeLab Setup"
 
 COLUMNS=1
 select choice in "${options[@]}"; do
     case $choice in
-        "Install Packages")  install_packages; break ;;
-        "Quit")         info "Exiting."; break ;;
+        "setup bash")  setup_bash; break ;;
+        "install docker")    install_docker; break ;;
+        "quit")         info "Exiting."; break ;;
         *)              warning "Invalid option, try again."; break;;
     esac
     echo ""

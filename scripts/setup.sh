@@ -35,7 +35,7 @@ run_apt() {
 setup_bash() {
     logblock "info" "setting up bash"
 
-    local bashrc="$HOME/.bashrc.pbk"
+    local bashrc="$HOME/.bashrc"
     local source_line='[ -f "$HOME/.homelab/bash/custom.bash" ] && source "$HOME/.homelab/bash/custom.bash"'
     file_check "$bashrc" || return 1
 

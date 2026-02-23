@@ -32,6 +32,12 @@ run_apt() {
     fi
 }
 
+install_packages() {
+    logblock "info" "Installing Base Packages..."
+    run_apt "$SCRIPT_DIR/configs/packages.conf"
+    logblock "success" "Base Packages installed."
+}
+
 setup_bash() {
     logblock "info" "setting up bash"
 
@@ -75,7 +81,7 @@ install_docker() {
     debug "enable by running: $(green "systemctl enable --now docker")"
 }
 
-options=("setup bash" "install docker" "quit")
+options=("setup bash" "install packages" "install docker" "quit")
 
 logblock "debug" "HomeLab Setup"
 
@@ -83,6 +89,7 @@ COLUMNS=1
 select choice in "${options[@]}"; do
     case $choice in
         "setup bash")  setup_bash; break ;;
+        "install packages")  install_packages; break ;;
         "install docker")    install_docker; break ;;
         "quit")         info "Exiting."; break ;;
         *)              warning "Invalid option, try again."; break;;

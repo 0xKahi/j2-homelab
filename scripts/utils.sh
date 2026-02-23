@@ -28,6 +28,10 @@ green() {
     printf "\e[32m%s\e[0m" "$1"
 }
 
+cyan() {
+    printf "\e[36m%s\e[0m" "$1"
+}
+
 log(){
     local type="$1"
     local message="$2"

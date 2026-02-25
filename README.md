@@ -1,28 +1,34 @@
 # HomeLab Setup
 
-## symlink stuff 
+## Conventions
 
-### Install
+| CT ID   | IP              | Purpose            |
+| ------- | --------------- | ------------------ |
+| 100–109 | 10.10.1.100–109 | Routers/networking |
+| 110–119 | 10.10.1.110–119 | Storage            |
+| 200+    | 10.10.1.200+    | Other servers/apps |
+
+
+## Base Setup
+
+### Approve scripts
 
 ```bash
-chmod +x ./scripts/symlinks.sh
-./scripts/symlinks.sh --create
+## in this directory
+chmod +x ./scripts/*.sh
+chmod +x ./.homelab/bin/*
 ```
 
-### Unlink
+### symlink stuff 
 
 ```bash
+## create symlinks
+./scripts/symlinks.sh --create
+## delete symlinks
 ./scripts/symlinks.sh --delete
 ```
 
-## Home Lab Setup
-
-### 1. Setup tools 
-```bash
-chmod +x ./.homelab/bin/tty-color-tool
-```
-
-### 2. Setup Script 
+### Home Lab Setup
 
 > [!Note]
 > - setup bash

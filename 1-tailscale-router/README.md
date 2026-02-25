@@ -49,7 +49,7 @@ VMs (and devices at home) are reachable remotely via Tailscale.
    **Network tab:**
    - Bridge: `vmbr0`
    - IPv4: **Static**
-   - IPv4/CIDR: `10.10.1.20/24`
+   - IPv4/CIDR: `10.10.1.100/24`
    - Gateway: `10.10.1.1`
 
    > The LXC lives on the internal NAT bridge (`vmbr0`), not your home LAN. It reaches
@@ -112,7 +112,7 @@ All commands below run **inside the LXC container** (via the Console tab or SSH)
 5. paste the key in this dir in a file named `authKey.secret.conf` (must be this name)
 
 ```bash
-vim ./0-tailscale-router/authKey.secret.conf
+vim ./1-tailscale-router/authKey.secret.conf
 ```
 
 ### Setup Routes
@@ -128,9 +128,8 @@ This file gets symlinked to `/root/.tailscale/routes.conf` and is read at startu
 ### Run Setup Script
 
 ```bash
-chmod +x ./0-tailscale-router/tailscale-up.sh
-chmod +x ./0-tailscale-router/setup.sh
-./0-tailscale-router/setup.sh
+chmod +x ./1-tailscale-router/*.sh
+./1-tailscale-router/setup.sh
 ```
 
 1. start with symlink (symlinks config to `.tailscale`)

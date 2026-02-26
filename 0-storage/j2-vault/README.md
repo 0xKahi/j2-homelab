@@ -161,11 +161,85 @@ smbpasswd -a <user>
 
 ### 4. Add the share to smb.conf
 
-The `[kahi]` share is already defined in `smb.conf`. Since the config is symlinked from the repo, no further changes are needed — restart Samba to apply:
-
 ```bash
 systemctl restart smbd
 systemctl restart nmbd 
+```
+
+---
+
+## Adding Shared Group Access
+
+Use this when multiple users need access to the same share (e.g. a shared `/data` volume).
+
+### 1. Create a shared Linux group
+
+```bash
+groupadd <groupname>
+# e.g. groupadd smbusers
+```
+
+### 2. Add users to the group
+
+```bash
+usermod -aG <groupname> <user>
+# e.g. usermod -aG smbusers kahi
+```
+
+Repeat for each user that needs access.
+
+### 3. Set group ownership on the mount point
+
+```bash
+chown -R <user>:<groupname> <mount-point>
+chmod -R g+rws <mount-point>
+# The setgid bit (g+s) ensures new files created inside inherit the group
+```
+
+### 4. Set Samba passwords for each user
+
+**each uesr needs a samba password** skup if already set
+
+```bash
+smbpasswd -a <user>
+```
+
+Repeat for each user.
+
+### 5. Update smb.conf for the share
+
+Replace `force user` / `force group` with group-based directives:
+
+```ini
+[sharename]
+   path = /data
+   valid users = @<groupname>
+   force group = <groupname>
+   create mask = 0774
+   force create mode = 0774
+   directory mask = 0775
+   force directory mode = 0775
+   writable = yes
+   browseable = yes
+   guest ok = no
+```
+
+- `valid users = @<groupname>` — restricts access to group members only
+- `force group = <groupname>` — all created files inherit the group, keeping permissions consistent across users
+
+For mixed read/write access, use `write list` and `read list` instead:
+
+```ini
+   valid users = @<groupname>
+   write list = alice bob
+   read list = charlie
+```
+
+### 6. Restart Samba
+
+```bash
+systemctl restart smbd
+systemctl restart nmbd
 ```
 
 ---

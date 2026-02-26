@@ -17,11 +17,16 @@
 ## in this directory
 chmod +x ./scripts/*.sh
 chmod +x ./.homelab/bin/*
+
+## in zfs
+chmod +x /flash/j2-homelab/scripts/*.sh
+chmod +x /flash/j2-homelab/.homelab/bin/*
 ```
 
 ### symlink stuff 
 
 ```bash
+## in this directory
 ## create symlinks
 ./scripts/symlinks.sh --create
 ## delete symlinks
@@ -35,6 +40,6 @@ chmod +x ./.homelab/bin/*
 > - install docker 
 
 ```bash
-chmod +x ./scripts/setup.sh
+## in this directory
 ./scripts/setup.sh
 ```

@@ -52,7 +52,7 @@ In the Proxmox UI go to **Create CT** with the following settings:
 | CT ID     | 110                |
 | Hostname  | `j2-vault`         |
 | Template  | Ubuntu 22          |
-| Disk      | 64 GiB (flash pool) |
+| Disk      | 32 GiB (flash pool) |
 | CPU       | 1 core             |
 | RAM       | 512 MiB            |
 | Swap      | 256 MiB            |
@@ -64,12 +64,19 @@ Leave the container **unprivileged** and do **not** start it yet.
 
 ### 1.4 Add Mount Points
 
-In the Proxmox UI go to the container **Resources > Add > Mount Point**:
 
 | Storage | Host Path    | Container Path | Options   |
 | ------- | ------------ | -------------- | --------- |
 | flash   | `j2-homelab` | `/j2-homelab`  | read-only |
 
+```bash
+vim /etc/pve/lxc/110.conf
+```
+
+**Add this line:**
+```
+mp0: /flash/j2-homelab,mp=/j2-homelab,ro=1
+```
 
 > For container-specific storage (e.g. `/kahi`) see [Container-Specific Storage](#container-specific-storage) below.
 
@@ -108,7 +115,7 @@ chmod +x /j2-homelab/scripts/*.sh
 Run each option in order:
 
 ```bash
-/j2-homelab/0-storage/j2-vault/setup.sh
+bash /j2-homelab/0-storage/j2-vault/setup.sh
 ```
 
 **Step 1 — symlink**
@@ -134,19 +141,22 @@ Once inside the container:
 ### 1. Create a user with password
 
 ```bash
-adduser kahi
+adduser <user> 
+# add user to sudo group
+adduser <user> sudo
 ```
 
 ### 2. Grant ownership of the mount point
 
 ```bash
-chown -R kahi:kahi /kahi
+chown -R <user>:<usergroup> <mount-point> 
+# chown -R kahi:kahi /kahi
 ```
 
 ### 3. Set samba password for the user
 
 ```bash
-smbpasswd -a kahi
+smbpasswd -a <user> 
 ```
 
 ### 4. Add the share to smb.conf
@@ -155,6 +165,7 @@ The `[kahi]` share is already defined in `smb.conf`. Since the config is symlink
 
 ```bash
 systemctl restart smbd
+systemctl restart nmbd 
 ```
 
 ---

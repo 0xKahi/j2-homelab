@@ -61,7 +61,7 @@ VMs (and devices at home) are reachable remotely via Tailscale.
 
 3. Click **Finish** — do NOT start it yet.
 
-### Enable TUN Device for Tailscale
+### Enable TUN Device for Tailscale and mount the homelab directory
 
 Tailscale requires the TUN network device inside the container. This must be configured
 before starting the container.
@@ -79,7 +79,7 @@ Add these lines at the end of the file:
 lxc.cgroup2.devices.allow: c 10:200 rwm
 lxc.mount.entry: /dev/net dev/net none bind,optional,create=dir
 lxc.mount.entry: /dev/tun dev/tun none bind,optional,create=file
-features: nesting=1
+mp0: /flash/j2-homelab,mp=/j2-homelab,ro=1
 ```
 
 Save and close the file.
@@ -125,11 +125,14 @@ Edit `routes.conf` — one CIDR per line for each subnet you want to advertise:
 ```
 
 This file gets symlinked to `/root/.tailscale/routes.conf` and is read at startup by `tailscale-up.sh`.
+
 ### Run Setup Script
 
 ```bash
 chmod +x ./1-tailscale-router/*.sh
-./1-tailscale-router/setup.sh
+pct exec 100 -- bash /j2-homelab/1-tailscale-router/setup.sh
+# or in lxc
+bash /j2-homelab/1-tailscale-router/setup.sh
 ```
 
 1. start with symlink (symlinks config to `.tailscale`)

@@ -19,10 +19,10 @@ symlink() {
 }
 
 setup_folders() {
-  mkdir -p /docker
-  mkdir -p /data/karakeep
-  mkdir -p /data/downloads/qbittorrent/{completed,incomplete,torrents}
-  mkdir -p /data/downloads/nzbget/{completed,intermediate,nzb,queue,tmp}
+  sudo mkdir -p /docker
+  sudo mkdir -p /data/karakeep
+  sudo mkdir -p /data/downloads/qbittorrent/{completed,incomplete,torrents}
+  sudo mkdir -p /data/downloads/nzbget/{completed,intermediate,nzb,queue,tmp}
   sudo chown -R 1000:1000 /data
   sudo chown -R 1000:1000 /docker
 }

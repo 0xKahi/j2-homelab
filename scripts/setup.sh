@@ -53,34 +53,6 @@ setup_bash() {
     fi
 }
 
-install_docker() {
-    logblock "info" "Installing Docker..."
-
-    if $IS_TEST; then
-        echo "apt install -y ca-certificates curl gnupg"
-        echo "install -m 0755 -d /etc/apt/keyrings"
-        echo "curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
-        echo "chmod a+r /etc/apt/keyrings/docker.gpg"
-        echo "echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable' > /etc/apt/sources.list.d/docker.list"
-        echo "apt update && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin"
-    else
-        apt install -y ca-certificates curl gnupg
-
-        install -m 0755 -d /etc/apt/keyrings
-        curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-        chmod a+r /etc/apt/keyrings/docker.gpg
-
-        echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] \
-            https://download.docker.com/linux/debian bookworm stable" \
-            > /etc/apt/sources.list.d/docker.list
-
-        apt update && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-    fi
-
-    logblock "success" "Docker installed."
-    debug "enable by running: $(green "systemctl enable --now docker")"
-}
-
 options=("setup bash" "install packages" "install docker" "quit")
 
 logblock "debug" "HomeLab Setup"
@@ -90,7 +62,6 @@ select choice in "${options[@]}"; do
     case $choice in
         "setup bash")  setup_bash; break ;;
         "install packages")  install_packages; break ;;
-        "install docker")    install_docker; break ;;
         "quit")         info "Exiting."; break ;;
         *)              warning "Invalid option, try again."; break;;
     esac

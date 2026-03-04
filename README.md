@@ -43,3 +43,73 @@ chmod +x /flash/j2-homelab/.homelab/bin/*
 ## in this directory
 ./scripts/setup.sh
 ```
+
+## GPU Passthrough (NVIDIA)
+
+### Step 1: Enable IOMMU on Proxmox Host
+
+1. **Edit GRUB configuration:**
+
+```bash
+vim /etc/default/grub
+```
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on iommu=pt"
+```
+
+2. **Update GRUB and reboot:**
+
+```bash
+update-grub
+reboot
+```
+
+3. **Verify IOMMU is enabled:**
+
+```bash
+dmesg | grep -e DMAR -e IOMMU
+```
+
+### Step 2: Blacklist NVIDIA Nouveau Driver
+
+1. **Create blacklist file:**
+
+```bash
+vim /etc/modprobe.d/blacklist-nvidia-nouveau.conf
+```
+
+Add:
+```
+blacklist nouveau
+options nouveau modeset=0
+```
+
+2. **Update kernel and reboot:**
+
+```bash
+update-initramfs -u
+reboot
+```
+
+### Step 3: Enable VFIO Modules
+
+1. **Edit modules file:**
+
+```bash
+vim /etc/modules-load.d/vfio.conf
+```
+
+Add:
+```
+vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+```
+
+2. **Update kernel:**
+
+```bash
+update-initramfs -u
+```

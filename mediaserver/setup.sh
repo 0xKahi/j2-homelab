@@ -19,11 +19,16 @@ symlink() {
 }
 
 setup_folders() {
+  info "creating docker folder at $(green "/docker")"
   sudo mkdir -p /docker
+  info "creating karakeep folder at $(green "/data/karakeep")"
   mkdir -p /data/karakeep
+  info "creating qbittorrent folder at $(green "/data/downloads/qbittorrent")"
   mkdir -p /data/downloads/qbittorrent/{completed,incomplete,torrents}
+  info "creating nzbget folder at $(green "/data/downloads/nzbget")"
   mkdir -p /data/downloads/nzbget/{completed,intermediate,nzb,queue,tmp}
   sudo chown -R 1000:1000 /docker
+  success "created necessary folders for media server"
 }
 
 symlink_docker() {

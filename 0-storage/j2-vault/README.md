@@ -235,7 +235,14 @@ For mixed read/write access, use `write list` and `read list` instead:
    read list = charlie
 ```
 
+grant write acess to group
+```bash
+chown root:<sharedGroup> /dir
+chmod 775 /dir
+```
+
 ### 6. Restart Samba
+
 
 ```bash
 systemctl restart smbd

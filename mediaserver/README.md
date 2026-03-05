@@ -78,7 +78,7 @@ sudo vim /etc/fstab
 ```
 
 ```bash
-//10.10.1.110/data      /data       cifs  credentials=/home/kahi/.smbcredentials,uid=1000,gid=1000,file_mode=0755,dir_mode=0755 0 0
+//10.10.1.110/data      /data       cifs  credentials=/home/kahi/.smbcredentials,uid=1000,gid=1000,file_mode=0755,dir_mode=0755,nobrl 0 0
 //10.10.1.110/j2-homelab /j2-homelab cifs  credentials=/home/kahi/.smbcredentials,uid=1000,gid=1000,file_mode=0755,dir_mode=0755,ro 0 0
 ```
 

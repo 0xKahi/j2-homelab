@@ -39,4 +39,3 @@ services:
       MEILI_NO_ANALYTICS: "true"
     volumes:
       - /data/karakeep/meilisearch:/meili_data
-

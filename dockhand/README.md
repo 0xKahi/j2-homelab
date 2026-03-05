@@ -54,6 +54,7 @@ Phase 6 → Verify stacks are visible and manageable
    - CT ID: `201`
    - Hostname: `dockhand`
    - Password: set a root password
+   - [ ] Unpriviledged Container
 
    **Template tab:**
    - Storage: `local`
@@ -84,13 +85,13 @@ Phase 6 → Verify stacks are visible and manageable
 Edit the LXC config on the Proxmox host before starting:
 
 ```bash
-nano /etc/pve/lxc/201.conf
+vim /etc/pve/lxc/201.conf
 ```
 
 Add the following lines:
 
 ```
-features: nesting=1,keyctl=1
+features: nesting=1,keyctl=1,fuse=1
 lxc.apparmor.profile: generated
 lxc.cgroup2.devices.allow: a
 lxc.cap.drop:
@@ -115,6 +116,7 @@ bash /j2-homelab/dockhand/setup.sh
 Run in order:
 1. `setup folders`
 2. `symlink docker`
+3. `setup overlayfs`
 
 ### Install Docker
 

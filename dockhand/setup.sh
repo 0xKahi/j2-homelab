@@ -3,6 +3,10 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 . $SCRIPT_DIR/../scripts/utils.sh
 
+if [ "$EUID" -ne 0 ]; then
+  exec sudo bash "$0" "$@"
+fi
+
 
 symlink() {
   local TARGET="$1"
@@ -20,20 +24,34 @@ symlink() {
 
 setup_folders() {
   info "creating docker folder at $(green "/docker")"
-  sudo mkdir -p /docker
+  mkdir -p /docker
   info "creating dockhand data folder at $(green "/opt/dockhand")"
-  sudo mkdir -p /opt/dockhand
-  sudo chown -R 1000:1000 /docker
-  sudo chown -R 1000:1000 /opt/dockhand
+  mkdir -p /opt/dockhand
   success "created necessary folders for dockhand"
 }
 
 symlink_docker() {
-    info "symlinking dockhand to $(green "/j2-homelab/dockhand")"
+  info "symlinking dockhand to $(green "/j2-homelab/dockhand")"
   symlink /docker/dockhand /j2-homelab/dockhand
 }
 
-options=("setup folders" "symlink docker" "quit")
+setup_overlayfs() {
+  info "installing fuse-overlayfs"
+  apt install -y fuse-overlayfs
+
+  info "configuring Docker to use fuse-overlayfs storage driver"
+  mkdir -p /etc/docker
+  cat > /etc/docker/daemon.json <<EOF
+{
+  "storage-driver": "fuse-overlayfs"
+}
+EOF
+
+  success "configured fuse-overlayfs for Docker"
+  info "restart Docker with: $(green "systemctl restart docker")"
+}
+
+options=("setup folders" "symlink docker" "setup overlayfs" "quit")
 
 logblock "debug" "Dockhand LXC Setup"
 
@@ -42,6 +60,7 @@ select choice in "${options[@]}"; do
     case $choice in
         "setup folders")  setup_folders; break ;;
         "symlink docker")  symlink_docker; break ;;
+        "setup overlayfs")  setup_overlayfs; break ;;
         "quit")         info "Exiting."; break ;;
         *)              warning "Invalid option, try again."; break;;
     esac
@@ -49,3 +68,4 @@ select choice in "${options[@]}"; do
 done
 
 info "To install Docker, run: $(green "bash /j2-homelab/scripts/install-docker.sh")"
+info "After Docker is installed, run: $(green "setup overlayfs") then $(green "systemctl restart docker")"

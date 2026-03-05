@@ -92,10 +92,11 @@ Add the following lines:
 
 ```
 features: nesting=1,keyctl=1,fuse=1
-lxc.apparmor.profile: generated
+lxc.apparmor.profile: unconfined 
 lxc.cgroup2.devices.allow: a
 lxc.cap.drop:
-mp0: /flash/j2-homelab,mp=/j2-homelab,ro=1
+lxc.mount.auto: proc:rw sys:rw
+mp0: /flash/j2-homelab,mp=/j2-homelab
 ```
 
 4. Start the container.

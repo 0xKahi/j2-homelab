@@ -94,6 +94,5 @@ bash /j2-homelab/mediaserver/setup.sh
 ```
 
 1. setup_folders 
-2. symlink_docker
-3. install_docker
+2. install_docker
 

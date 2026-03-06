@@ -31,12 +31,6 @@ setup_folders() {
   success "created necessary folders for media server"
 }
 
-symlink_docker() {
-  symlink /docker/aggregator /j2-homelab/mediaserver/aggregator
-  symlink /docker/jellyfin   /j2-homelab/mediaserver/jellyfin
-  symlink /docker/karakeep   /j2-homelab/mediaserver/karakeep
-}
-
 install_docker() {
   logblock "info" "Installing Docker..."
   sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
@@ -93,7 +87,7 @@ install_nvidia_toolkit() {
 }
 
 
-options=("setup folders" "symlink docker" "install docker" "quit")
+options=("setup folders" "install docker" "quit")
 
 logblock "debug" "Media Server Setup"
 
@@ -101,7 +95,6 @@ COLUMNS=1
 select choice in "${options[@]}"; do
     case $choice in
         "setup folders")  setup_folders; break ;;
-        "symlink docker")  symlink_docker; break ;;
         "install docker")  install_docker; break ;;
         "quit")         info "Exiting."; break ;;
         *)              warning "Invalid option, try again."; break;;

@@ -190,6 +190,15 @@ services:
     networks:
       mediaserver-network:
         ipv4_address: 172.39.0.6
+  qui:
+    image: ghcr.io/autobrr/qui:latest
+    container_name: qui
+    restart: unless-stopped
+    ports:
+      - "7476:7476"
+    volumes:
+      - /docker/qui:/config
+      - /data/downloads/qbittorrent/torrents:/data/torrent
 # Newer additions to this stack feel. Remove the '#' to add the service.
 #
 #  ytdl-sub:

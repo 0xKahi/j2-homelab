@@ -18,8 +18,6 @@
         - symbol: ETHUSDT
           name: Ethereum
   width: default
-  hide-desktop-navigation: true
-  center-vertically: true
   columns:
     - size: full
       widgets:

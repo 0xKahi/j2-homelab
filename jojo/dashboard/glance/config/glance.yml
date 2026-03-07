@@ -16,7 +16,7 @@ theme:
   disable-picker: false
   presets:
     cyberpunk-theme:
-      background-color: 251 34.4 24.5
+      background-color: 233 22.9 13.7
       primary-color: 156 82.9 70.2
       positive-color: 149 88 70.6
       negative-color: 347 76.5 70

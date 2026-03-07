@@ -1,5 +1,5 @@
 - type: custom-api
-  title: PROXMOX-VE NODES
+  title: Proxmox Node
   title-url: https://${PROXMOXVE_URL}
   cache: 1m
   url: https://${PROXMOXVE_URL}/api2/json/nodes

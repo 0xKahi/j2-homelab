@@ -2,7 +2,7 @@
   head-widgets:
     - $include: widgets/proxmox-ve-nodes.yml
     - $include: widgets/proxmox-ve-stats.yml
-  width: slim
+  width: default
   hide-desktop-navigation: false
   center-vertically: false
   columns:
@@ -24,6 +24,7 @@
             - title: Proxmox
               url: https://j2-pve.taild278ce.ts.net:8006
               check-url: https://192.168.1.50:8006
+              allow-insecure: true
               icon: di:proxmox
             - title: Dockhand
               url: http://10.10.1.201:3000
@@ -37,6 +38,9 @@
             - title: Nzbget
               url: http://10.10.1.200:6789
               icon: di:nzbget
+              alt-status-codes:
+                - 401
+                - 403
             - title: Prowlarr
               url: http://10.10.1.200:9696
               icon: di:prowlarr
@@ -70,7 +74,6 @@
               label: Tokyo
 
         - $include: widgets/tailscale-devices.yml
-        - $include: widgets/github-notifications.yml
 
         - type: group
           define: &shared-properties
@@ -79,11 +82,6 @@
             commits-limit: 3
             token: ${GITHUB_REPO_TOKEN}
           widgets:
-            - repository: ${GH_REPO_1}
-              <<: *shared-properties
-            - repository: ${GH_REPO_2}
-              <<: *shared-properties
-            - repository: ${GH_REPO_3}
-              <<: *shared-properties
             - repository: 0xKahi/j2-homelab
+              title: j2-homelab
               <<: *shared-properties

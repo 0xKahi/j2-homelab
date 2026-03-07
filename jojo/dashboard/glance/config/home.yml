@@ -1,0 +1,89 @@
+- name: Home
+  head-widgets:
+    - $include: widgets/proxmox-ve-nodes.yml
+    - $include: widgets/proxmox-ve-stats.yml
+  width: slim
+  hide-desktop-navigation: true
+  center-vertically: true
+  columns:
+    - size: full
+      widgets:
+        - type: search
+          search-engine: google
+          new-tab: true
+          auto-focus: false
+          bangs:
+            - title: Github
+              shortcut: "!gh"
+              url: https://github.com/search?q={QUEY}&type=repositories
+
+        - type: monitor
+          cache: 1m
+          title: Services
+          sites:
+            - title: Proxmox
+              url: https://j2-pve.taild278ce.ts.net:8006
+              check-url: https://100.80.53.71:8006
+              icon: di:proxmox
+            - title: Dockhand
+              url: http://10.10.1.201:3000
+              icon: di:dockhand
+            - title: Karakeep
+              url: http://10.10.1.200:3000
+              icon: di:karakeep
+            - title: Qbittorrent
+              url: http://10.10.1.200:8080
+              icon: di:qbittorrent
+            - title: Nzbget
+              url: http://10.10.1.200:6789
+              icon: di:nzbget
+            - title: Prowlarr
+              url: http://10.10.1.200:9696
+              icon: di:prowlarr
+            - title: Sonarr
+              url: http://10.10.1.200:8989
+              icon: di:sonarr
+            - title: Radarr
+              url: http://10.10.1.200:7878
+              icon: di:radarr
+            - title: Lidarr
+              url: http://10.10.1.200:8686
+              icon: di:lidarr
+            - title: Bazarr
+              url: http://10.10.1.200:6767
+              icon: di:bazarr
+            - title: Qui
+              url: http://10.10.1.200:7476
+              icon: di:qui
+    - size: small
+      widgets:
+        - type: clock
+          hour-format: 12h
+          timezones:
+            - timezone: UTC
+              label: UTC
+            - timezone: Australia/Melbourne
+              label: Melbourne
+            - timezone: America/New_York
+              label: New York
+            - timezone: Asia/Tokyo
+              label: Tokyo
+
+        - $include: widgets/tailscale-devices.yml
+        - $include: widgets/github-notifications.yml
+
+        - type: group
+          define: &shared-properties
+            type: repository
+            pull-requests-limit: 5
+            commits-limit: 3
+            token: ${GITHUB_REPO_TOKEN}
+          widgets:
+            - repository: ${GH_REPO_1}
+              <<: *shared-properties
+            - repository: ${GH_REPO_2}
+              <<: *shared-properties
+            - repository: ${GH_REPO_3}
+              <<: *shared-properties
+            - repository: 0xKahi/j2-homelab
+              <<: *shared-properties

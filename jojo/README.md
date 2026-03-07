@@ -1,8 +1,6 @@
-# Media Server Setup Guide
+# JoJo Server Setup Guide
 
-- [gpu passthrough](https://forum.proxmox.com/threads/2025-proxmox-pcie-gpu-passthrough-with-nvidia.169543/)
-
-## Phase 1: Setup
+Vm to run generic docker containers on Proxmox
 
 ### Create the VM 
 
@@ -11,8 +9,8 @@
 2. Fill in the wizard:
 
    **General tab:**
-   - CT ID: `200` (or any available ID)
-   - name: `mediaserver`
+   - CT ID: `202` (or any available ID)
+   - name: `jojo`
 
    **OS tab (use CD/DVD disc image file):**
    - Storage: `local`
@@ -22,14 +20,18 @@
    - machine: `q35`
    - controller: `VirtIO SCSI`
    - bios: `OVMF (UEFI)`
+   - efi storage: `local`
+   - format `qcow2`
 
    **Disk tab:**
    - Bus/Device: `SCSI`
-   - Format: `raw`
-   - storage: `local`
+   - storage: `flash`
    - Disk size: `64 GiB` (sufficient)
+   - iothread: `true`
+   - SSD Emulation: `true`
 
    **CPU tab:**
+   - Host: `1`
    - Cores: `6`
    - Type: `host`
 
@@ -42,12 +44,12 @@
  3. Click **Finish** — do NOT start it yet.
 
 
+
 ## Phae 2: Setup Mounts
 
 ```bash
 sudo apt install cifs-utils
 ```
-
 
 ### Create Credentials File
 
@@ -87,12 +89,22 @@ sudo systemctl daemon-reload
 sudo mount -a
 ```
 
-## Phase 3: Run Setup Script
+## Phase 3: Install Docker && Setup
 
 ```bash
-bash /j2-homelab/mediaserver/setup.sh
+bash /j2-homelab/scripts/install-docker.sh
 ```
 
-1. setup_folders 
-2. install_docker
+**create .env file** before this in `/j2-homelab/jojo` and all the nested folders 
 
+```bash
+bash /j2-homelab/jojo/setup.sh
+```
+
+- setup_folders
+- setup_docker_group
+
+```bash
+cd /docker
+docker compose up -d
+```

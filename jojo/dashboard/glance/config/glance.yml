@@ -1,0 +1,29 @@
+server:
+  assets-path: /app/assets
+
+branding:
+  logo-text: J2
+  app-name: J2-Glance
+
+theme:
+  background-color: 225 14 15
+  primary-color: 157 47 65
+  contrast-multiplier: 1.1
+  positive-color: 115 54 76
+  negative-color: 347 70 65
+  # positive-color: 138 88.8 64.9
+  # negative-color: 358 95.8 62.9
+  disable-picker: false
+  presets:
+    cyberpunk-theme:
+      background-color: 251 34.4 24.5
+      primary-color: 156 82.9 70.2
+      positive-color: 149 88 70.6
+      negative-color: 347 76.5 70
+      contrast-multiplier: 1.2
+
+pages:
+  # It's not necessary to create a new file for each page and include it, you can simply
+  # put its contents here, though multiple pages are easier to manage when separated
+  - $include: home.yml
+  - $include: feed.yml

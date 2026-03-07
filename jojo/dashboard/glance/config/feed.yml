@@ -17,7 +17,7 @@
           name: Bitcoin
         - symbol: ETHUSDT
           name: Ethereum
-  width: slim
+  width: default
   hide-desktop-navigation: true
   center-vertically: true
   columns:

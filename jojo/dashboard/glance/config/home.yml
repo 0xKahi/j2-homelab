@@ -3,8 +3,8 @@
     - $include: widgets/proxmox-ve-nodes.yml
     - $include: widgets/proxmox-ve-stats.yml
   width: slim
-  hide-desktop-navigation: true
-  center-vertically: true
+  hide-desktop-navigation: false
+  center-vertically: false
   columns:
     - size: full
       widgets:
@@ -15,7 +15,7 @@
           bangs:
             - title: Github
               shortcut: "!gh"
-              url: https://github.com/search?q={QUEY}&type=repositories
+              url: https://github.com/search?q={QUERY}&type=repositories
 
         - type: monitor
           cache: 1m
@@ -23,11 +23,11 @@
           sites:
             - title: Proxmox
               url: https://j2-pve.taild278ce.ts.net:8006
-              check-url: https://100.80.53.71:8006
+              check-url: https://192.168.1.50:8006
               icon: di:proxmox
             - title: Dockhand
               url: http://10.10.1.201:3000
-              icon: di:dockhand
+              icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/dockhand.png
             - title: Karakeep
               url: http://10.10.1.200:3000
               icon: di:karakeep

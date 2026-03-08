@@ -24,6 +24,9 @@
             - title: Karakeep
               url: http://10.10.1.200:3000
               icon: di:karakeep
+            - title: Qui
+              url: http://10.10.1.200:7476
+              icon: di:qui
             - title: Qbittorrent
               url: http://10.10.1.200:8080
               icon: di:qbittorrent
@@ -48,9 +51,6 @@
             - title: Bazarr
               url: http://10.10.1.200:6767
               icon: di:bazarr
-            - title: Qui
-              url: http://10.10.1.200:7476
-              icon: di:qui
     - size: small
       widgets:
         - type: clock

@@ -90,3 +90,9 @@
             - repository: 0xKahi/j2-homelab
               title: j2-homelab
               <<: *shared-properties
+
+        - type: releases
+          cache: 1d
+          repositories:
+            - anomalyco/opencode
+            - glanceapp/glance

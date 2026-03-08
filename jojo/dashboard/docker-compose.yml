@@ -11,9 +11,6 @@ services:
       - PROXMOXVE_KEY=${PROXMOXVE_KEY}
       - GITHUB_NOTIF_TOKEN=${GITHUB_NOTIF_TOKEN}
       - GITHUB_REPO_TOKEN=${GITHUB_REPO_TOKEN}
-      - GH_REPO_1=${GH_REPO_1}
-      - GH_REPO_2=${GH_REPO_2}
-      - GH_REPO_3=${GH_REPO_3}
       - TAILSCALE_API_KEY=${TAILSCALE_API_KEY}
     volumes:
       - /docker/glance/config:/app/config

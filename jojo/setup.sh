@@ -40,7 +40,7 @@ setup_folders() {
 
   info "creating memos folder at $(green "/data/memos")"
   mkdir -p /data/memos
-
+  chown -R 1000:1000 /data/memos 
   success "created necessary folders for jojo server"
 }
 

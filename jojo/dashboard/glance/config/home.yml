@@ -1,21 +1,13 @@
 - name: Home
   head-widgets:
     - $include: widgets/proxmox-ve-nodes.yml
-    - $include: widgets/proxmox-ve-stats.yml
   width: default
   hide-desktop-navigation: false
   center-vertically: false
   columns:
     - size: full
       widgets:
-        - type: search
-          search-engine: google
-          new-tab: true
-          auto-focus: false
-          bangs:
-            - title: Github
-              shortcut: "!gh"
-              url: https://github.com/search?q={QUERY}&type=repositories
+        - $include: widgets/proxmox-ve-stats.yml
 
         - type: monitor
           cache: 1m

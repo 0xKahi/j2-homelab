@@ -1,5 +1,6 @@
 - type: custom-api
-  title: Proxmox-VE Resources
+  title: Proxmox Resources
+  hide-header: true
   cache: 1m
   url: https://${PROXMOXVE_URL}/api2/json/cluster/resources
   allow-insecure: true

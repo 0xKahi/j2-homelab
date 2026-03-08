@@ -9,6 +9,7 @@ services:
     image: neosmemo/memos:stable
     container_name: memos
     restart: unless-stopped
+    user: "1000:1000"
     volumes:
       - /data/memos/:/var/opt/memos
     ports:

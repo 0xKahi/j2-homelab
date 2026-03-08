@@ -1,0 +1,15 @@
+services:
+  it-tools:
+    image: corentinth/it-tools:latest
+    container_name: it-tools
+    restart: unless-stopped
+    ports:
+      - 8080:80
+  memos:
+    image: neosmemo/memos:stable
+    container_name: memos
+    restart: unless-stopped
+    volumes:
+      - /data/memos/:/var/opt/memos
+    ports:
+      - 5230:5230

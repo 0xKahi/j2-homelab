@@ -37,6 +37,10 @@ setup_folders() {
 
   info "setting up permissions for $(green "/docker")"
   chown -R 1000:1000 /docker
+
+  info "creating memos folder at $(green "/data/memos")"
+  mkdir -p /data/memos
+
   success "created necessary folders for jojo server"
 }
 

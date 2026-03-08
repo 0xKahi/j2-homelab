@@ -24,6 +24,17 @@
             - title: Karakeep
               url: http://10.10.1.200:3000
               icon: di:karakeep
+            - title: Memos
+              url: http://10.10.1.202:5230
+              icon: di:memos
+            - title: IT Tools
+              url: http://10.10.1.202:80
+              icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/it-tools-light.svg
+
+        - type: monitor
+          cache: 1m
+          title: Media
+          sites:
             - title: Qui
               url: http://10.10.1.200:7476
               icon: di:qui

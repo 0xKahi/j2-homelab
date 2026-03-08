@@ -11,8 +11,6 @@ theme:
   contrast-multiplier: 1.1
   positive-color: 115 54 76
   negative-color: 347 70 65
-  # positive-color: 138 88.8 64.9
-  # negative-color: 358 95.8 62.9
   disable-picker: false
   presets:
     cyberpunk-theme:

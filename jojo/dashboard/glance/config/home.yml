@@ -62,6 +62,9 @@
             - title: Bazarr
               url: http://10.10.1.200:6767
               icon: di:bazarr
+
+        - $include: widgets/proxmox-detailed-stats.yml
+
     - size: small
       widgets:
         - type: clock

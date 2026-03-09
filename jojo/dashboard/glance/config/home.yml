@@ -90,9 +90,13 @@
             - repository: 0xKahi/j2-homelab
               title: j2-homelab
               <<: *shared-properties
+            - repository: 0xKahi/dotfiles
+              title: dotfiles
+              <<: *shared-properties
 
         - type: releases
           cache: 1d
+          show-source-icon: true
           repositories:
             - anomalyco/opencode
             - glanceapp/glance

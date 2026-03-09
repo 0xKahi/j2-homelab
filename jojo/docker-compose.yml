@@ -1,29 +1,29 @@
 services:
-  tailscale:
-    container_name: tailscale
-    image: tailscale/tailscale:latest
-    restart: unless-stopped
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    ports:
-      - 9002:9002
-    env_file:
-      - .env
-    environment:
-      - TS_AUTHKEY=${TS_AUTHKEY}
-      - TS_ACCEPT_DNS=true
-      - TS_STATE_DIR=/var/lib/tailscale
-      - TS_HOSTNAME=jojo-pve
-      - TS_USERSPACE=false
-      - TS_LOCAL_ADDR_PORT=[::]:9002
-      - TS_ENABLE_METRICS=true
-      - TS_ROUTES=${TS_ROUTES}
-      - TS_EXTRA_ARGS=--accept-routes
-    volumes:
-      - /docker/tailscale/state:/var/lib/tailscale
+  # tailscale:
+  #   container_name: tailscale
+  #   image: tailscale/tailscale:latest
+  #   restart: unless-stopped
+  #   network_mode: host
+  #   cap_add:
+  #     - NET_ADMIN
+  #   devices:
+  #     - /dev/net/tun:/dev/net/tun
+  #   ports:
+  #     - 9002:9002
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - TS_AUTHKEY=${TS_AUTHKEY}
+  #     - TS_ACCEPT_DNS=true
+  #     - TS_STATE_DIR=/var/lib/tailscale
+  #     - TS_HOSTNAME=jojo-pve
+  #     - TS_USERSPACE=false
+  #     - TS_LOCAL_ADDR_PORT=[::]:9002
+  #     - TS_ENABLE_METRICS=true
+  #     - TS_ROUTES=${TS_ROUTES}
+  #     - TS_EXTRA_ARGS=--accept-routes
+  #   volumes:
+  #     - /docker/tailscale/state:/var/lib/tailscale
 
   hawser:
     container_name: hawser

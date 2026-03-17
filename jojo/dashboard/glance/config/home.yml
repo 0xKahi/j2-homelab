@@ -99,5 +99,6 @@
           show-source-icon: true
           repositories:
             - anomalyco/opencode
+            - code-yeongyu/oh-my-openagent
             - glanceapp/glance
             - 0xKahi/ocp
